@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="620" viewBox="0 0 750 620" fill="none">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="750" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b2819"/>
+      <stop offset=".5" stop-color="#123a25"/>
+      <stop offset="1" stop-color="#082216"/>
+    </linearGradient>
+    <radialGradient id="center-glow" cx="0" cy="0" r="1" gradientTransform="matrix(0 330 -360 0 375 310)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#245238" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#0b2819" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffe8a0"/>
+      <stop offset=".5" stop-color="#d8ad58"/>
+      <stop offset="1" stop-color="#9d7134"/>
+    </linearGradient>
+    <linearGradient id="gift" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#23553a"/>
+      <stop offset="1" stop-color="#0b2919"/>
+    </linearGradient>
+    <radialGradient id="light">
+      <stop stop-color="#fff4c2"/>
+      <stop offset=".25" stop-color="#f3d47f" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#f3d47f" stop-opacity="0"/>
+    </radialGradient>
+    <g id="sprig" stroke="#87986a" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 0c38 19 73 44 112 82" stroke-width="3"/>
+      <path d="m19 10-12-17m30 29L35 3m28 38-2-23m29 48 8-22m-85-33-17-4m38 23-20-1m38 20-19 4m37 20-17 8" stroke-width="5"/>
+      <path d="m19 10-12-17m30 29L35 3m28 38-2-23m29 48 8-22m-85-33-17-4m38 23-20-1m38 20-19 4m37 20-17 8" stroke="#c0c48a" stroke-width="1" opacity=".58"/>
+    </g>
+    <g id="gift-box">
+      <path d="M8 45h106v72H8z" fill="url(#gift)" stroke="url(#gold)" stroke-width="2"/>
+      <path d="M0 33h122v17H0z" fill="#1c4930" stroke="url(#gold)" stroke-width="2"/>
+      <path d="M51 33h20v84H51z" fill="url(#gold)"/>
+      <path d="M0 33h122v8H0z" fill="#e2bd6c" opacity=".42"/>
+      <path d="M61 33C30 27 30 4 45 4c10 0 15 13 16 29Zm0 0c31-6 31-29 16-29-10 0-15 13-16 29Z" fill="#245b3b" stroke="url(#gold)" stroke-width="2"/>
+    </g>
+  </defs>
+
+  <path fill="url(#background)" d="M0 0h750v620H0z"/>
+  <path fill="url(#center-glow)" d="M0 0h750v620H0z"/>
+
+  <g opacity=".75">
+    <use href="#sprig" transform="translate(-13 12) rotate(15) scale(1.2)"/>
+    <use href="#sprig" transform="translate(763 10) scale(-1.2 1.2) rotate(15)"/>
+    <use href="#sprig" transform="translate(-10 440) rotate(-28) scale(1.1)"/>
+    <use href="#sprig" transform="translate(760 438) scale(-1.1 1.1) rotate(-28)"/>
+  </g>
+
+  <g fill="url(#light)" opacity=".78">
+    <circle cx="64" cy="181" r="31"/>
+    <circle cx="686" cy="194" r="32"/>
+    <circle cx="137" cy="304" r="21"/>
+    <circle cx="615" cy="316" r="21"/>
+    <circle cx="196" cy="136" r="17"/>
+    <circle cx="554" cy="137" r="17"/>
+  </g>
+
+  <g fill="#f6d789" opacity=".72">
+    <circle cx="43" cy="258" r="2"/>
+    <circle cx="111" cy="345" r="1.5"/>
+    <circle cx="169" cy="205" r="2"/>
+    <circle cx="706" cy="268" r="2"/>
+    <circle cx="641" cy="355" r="1.5"/>
+    <circle cx="582" cy="211" r="2"/>
+    <path d="m77 349 4 11 11 4-11 4-4 11-4-11-11-4 11-4 4-11Z"/>
+    <path d="m674 370 4 11 11 4-11 4-4 11-4-11-11-4 11-4 4-11Z"/>
+  </g>
+
+  <g stroke="url(#gold)" stroke-width="2">
+    <path d="M113 0v58"/>
+    <circle cx="113" cy="83" r="22" fill="#8d2630"/>
+    <path d="M104 77c5-6 13-6 18 0m-9-16v44"/>
+    <path d="M645 0v47"/>
+    <circle cx="645" cy="70" r="19" fill="#a77a36"/>
+    <path d="M637 64c5-5 12-5 16 0m-8-16v44"/>
+  </g>
+
+  <g opacity=".96">
+    <use href="#gift-box" transform="translate(-24 455) scale(1.12)"/>
+    <use href="#gift-box" transform="translate(36 524) scale(.66)"/>
+    <use href="#gift-box" transform="translate(652 464) scale(.94)"/>
+    <use href="#gift-box" transform="translate(704 530) scale(.64)"/>
+  </g>
+
+  <path d="M0 610c121-39 201-38 282-16m468 16c-121-39-201-38-282-16" stroke="#d9b969" stroke-opacity=".4" stroke-width="1.5"/>
+</svg>

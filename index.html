@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#24160d">
+  <title>Cacau Show — Roleta Premiada de Natal</title>
+  <meta name="description" content="Gire a roleta de Natal e descubra qual delícia Cacau Show você ganhou.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --cocoa: #24160d;
+      --cocoa-light: #3a2415;
+      --cream: #fff8e9;
+      --gold: #e8bd65;
+      --gold-light: #f7dda0;
+      --green: #173c23;
+      font-family: "Nunito Sans", Arial, sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--cream);
+      background:
+        radial-gradient(ellipse at 50% 28%, rgba(86, 51, 26, .75), transparent 52%),
+        linear-gradient(160deg, #182d1a 0%, var(--cocoa) 45%, #1a100a 100%);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .demo-notice {
+      position: relative;
+      z-index: 3;
+      padding: 9px 14px;
+      color: #fff8e9;
+      background: #8d2630;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .045em;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 470px;
+      place-items: center;
+      overflow: hidden;
+      background-image:
+        linear-gradient(180deg, rgba(7, 23, 15, .08) 0%, rgba(7, 23, 15, .04) 48%, rgba(36, 22, 13, .9) 100%),
+        url("./public/images/fundo-natal-decorativo.svg");
+      background-position: center;
+      background-size: cover;
+    }
+
+    .hero-copy {
+      position: relative;
+      align-self: end;
+      width: 100%;
+      max-width: 760px;
+      padding: 128px 20px 30px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(5, 21, 13, .56) 0%, rgba(5, 21, 13, .28) 48%, transparent 76%);
+      text-align: center;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, .65);
+    }
+
+    h1,
+    .result-title {
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 6vw, 3.7rem);
+      line-height: 1.08;
+    }
+
+    h1 span {
+      color: var(--gold-light);
+    }
+
+    .hero-copy p {
+      margin: 10px 0 0;
+      font-size: clamp(1rem, 2.7vw, 1.2rem);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding: 32px 16px 60px;
+      text-align: center;
+    }
+
+    .intro {
+      max-width: 520px;
+      margin: 0;
+      color: #f5e5c8;
+      font-size: 1rem;
+    }
+
+    .wheel-wrap {
+      position: relative;
+      width: min(88vw, 420px);
+      aspect-ratio: 1;
+      margin: 10px 0 2px;
+      filter: drop-shadow(0 14px 26px rgba(0, 0, 0, .42));
+    }
+
+    .wheel-frame {
+      position: absolute;
+      inset: 0;
+      padding: 9px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #f8dfa2, #a76c25 48%, #f4d581);
+    }
+
+    #wheel {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      border-radius: 50%;
+    }
+
+    #wheel-rotor {
+      transform-origin: 200px 200px;
+      transition: transform 5s cubic-bezier(.12, .76, .12, 1);
+    }
+
+    .pointer {
+      position: absolute;
+      z-index: 2;
+      top: -9px;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-top: 29px solid #b12e1b;
+      border-right: 17px solid transparent;
+      border-left: 17px solid transparent;
+      transform: translateX(-50%);
+      filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .55));
+    }
+
+    .hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      width: 19%;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 4px solid var(--gold-light);
+      border-radius: 50%;
+      color: var(--gold-light);
+      background: var(--cocoa);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .55), inset 0 0 0 2px #734a20;
+      font-size: clamp(1rem, 4vw, 1.7rem);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+    }
+
+    .spin-button,
+    .dialog-button {
+      min-height: 52px;
+      padding: 13px 30px;
+      border: 1px solid #ffe5a1;
+      border-radius: 999px;
+      color: #321d0b;
+      background: linear-gradient(180deg, #f8df9b, #d6a744);
+      box-shadow: 0 7px 18px rgba(0, 0, 0, .28);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      transition: transform .16s ease, filter .16s ease;
+    }
+
+    .spin-button:hover,
+    .dialog-button:hover {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
+    }
+
+    .spin-button:focus-visible,
+    .dialog-button:focus-visible,
+    .dialog-close:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 4px;
+    }
+
+    .spin-button:disabled {
+      cursor: wait;
+      filter: grayscale(.25);
+      opacity: .75;
+      transform: none;
+    }
+
+    .status {
+      min-height: 1.5em;
+      margin: 0;
+      color: #ead5b2;
+      font-size: .92rem;
+    }
+
+    dialog {
+      width: min(92vw, 450px);
+      padding: 34px 24px 28px;
+      border: 1px solid var(--gold);
+      border-radius: 22px;
+      color: var(--cream);
+      background:
+        radial-gradient(ellipse at top, #55351c, transparent 65%),
+        var(--cocoa);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .65);
+      text-align: center;
+    }
+
+    dialog::backdrop {
+      background: rgba(8, 7, 5, .78);
+      backdrop-filter: blur(4px);
+    }
+
+    .dialog-close {
+      position: absolute;
+      top: 11px;
+      right: 13px;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      color: var(--cream);
+      background: rgba(255, 255, 255, .1);
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    .result-icon {
+      margin: 0 0 8px;
+      font-size: 3rem;
+    }
+
+    .result-title {
+      margin: 0;
+      color: var(--gold-light);
+      font-size: 2rem;
+    }
+
+    .result-copy {
+      margin: 10px 0 24px;
+      color: #f5e5c8;
+      line-height: 1.55;
+    }
+
+    .dialog-step[hidden] {
+      display: none;
+    }
+
+    .demo-label {
+      margin: 0 0 8px;
+      color: #ffcf7b;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .demo-form {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      text-align: left;
+    }
+
+    .demo-form label {
+      display: grid;
+      gap: 5px;
+      color: #f5e5c8;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .demo-form input {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid rgba(232, 189, 101, .55);
+      border-radius: 9px;
+      color: var(--cream);
+      background: rgba(9, 24, 15, .78);
+      font: inherit;
+    }
+
+    .demo-form input::placeholder {
+      color: #c1b29a;
+    }
+
+    .demo-form input:focus-visible {
+      outline: 2px solid var(--gold-light);
+      outline-offset: 2px;
+    }
+
+    .demo-warning {
+      margin: 12px 0 18px;
+      padding: 10px 12px;
+      border: 1px solid rgba(232, 189, 101, .5);
+      border-radius: 10px;
+      color: #fff1d3;
+      background: rgba(141, 38, 48, .25);
+      font-size: .86rem;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .demo-summary {
+      margin: 18px 0;
+      padding: 16px;
+      border: 1px solid rgba(232, 189, 101, .55);
+      border-radius: 14px;
+      background: rgba(9, 24, 15, .6);
+      text-align: left;
+    }
+
+    .demo-summary p {
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+    .demo-total {
+      color: var(--gold-light);
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .dialog-button:disabled {
+      cursor: not-allowed;
+      filter: grayscale(.5);
+      opacity: .65;
+      transform: none;
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        min-height: 360px;
+        background-image:
+          linear-gradient(180deg, rgba(7, 23, 15, .08) 0%, rgba(7, 23, 15, .04) 48%, rgba(36, 22, 13, .9) 100%),
+          url("./public/images/fundo-natal-decorativo-mobile.svg");
+        background-position: center;
+      }
+
+      .hero-copy {
+        padding: 112px 14px 22px;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 8vw, 2.5rem);
+      }
+
+      main {
+        padding-top: 26px;
+      }
+
+      .wheel-wrap {
+        width: min(92vw, 380px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+    <header class="hero">
+      <div class="hero-copy">
+      <h1>Roleta <span>Premiada</span> de Natal</h1>
+      <p>Gire e descubra qual delícia de Natal é sua!</p>
+    </div>
+  </header>
+
+  <main>
+    <p class="intro">Toque no botão e gire a roleta para obter seus prêmios de Natal.</p>
+    <div class="wheel-wrap" aria-label="Roleta com oito prêmios que podem ser seus e um setor sem prêmio, que nunca é sorteado">
+      <span class="pointer" aria-hidden="true"></span>
+      <div class="wheel-frame">
+        <svg id="wheel" viewBox="0 0 400 400" aria-hidden="true">
+          <g id="wheel-rotor"></g>
+        </svg>
+      </div>
+      <div class="hub" aria-hidden="true">★</div>
+    </div>
+    <button class="spin-button" id="spin-button" type="button">GIRAR AGORA</button>
+    <p class="status" id="status" role="status" aria-live="polite">Boa sorte! Seu prêmio está na roleta.</p>
+  </main>
+
+  <dialog id="result-dialog" aria-labelledby="result-title">
+    <button class="dialog-close" id="dialog-close" type="button" aria-label="Fechar">×</button>
+    <section class="dialog-step" id="win-step">
+      <p class="demo-label">Prêmio de natal</p>
+      <p class="result-icon" id="result-icon" aria-hidden="true">🎉</p>
+      <h2 class="result-title" id="result-title">Resultado fictício</h2>
+      <p class="result-copy" id="result-copy"></p>
+      <p class="demo-warning">Este resultado é apenas uma simulação. O prêmio não é real e não existe envio ou resgate.</p>
+      <button class="dialog-button" id="continue-demo" type="button">CONTINUAR DEMONSTRAÇÃO</button>
+    </section>
+
+    <section class="dialog-step" id="details-step" hidden>
+      <p class="demo-label">Etapa fictícia · dados de teste</p>
+      <h2 class="result-title">Dados para teste</h2>
+      <p class="demo-warning">Use somente informações inventadas, como “Pessoa Teste”, “teste@gmail.com” e um endereço fictício. O formulário não salva nem envia os dados.</p>
+      <form class="demo-form" id="demo-form">
+        <label>Nome fictício
+          <input name="nome" type="text" autocomplete="off" placeholder="Ex.: Pessoa Teste" required>
+        </label>
+        <label>Gmail de teste
+          <input name="email" type="email" autocomplete="off" placeholder="teste@gmail.com" required>
+        </label>
+        <label>Endereço fictício
+          <input name="endereco" type="text" autocomplete="off" placeholder="Rua de Teste, 123" required>
+        </label>
+        <button class="dialog-button" type="submit">AVANÇAR NA SIMULAÇÃO</button>
+      </form>
+    </section>
+
+    <section class="dialog-step" id="checkout-step" hidden>
+      <p class="demo-label">Checkout cenográfico · sem pagamento</p>
+      <h2 class="result-title">Resumo fictício</h2>
+      <div class="demo-summary">
+        <p>Prêmio: <strong id="checkout-prize">Prêmio de demonstração</strong></p>
+        <p>Frete mostrado apenas para esta simulação: <strong>R$ 39,90</strong></p>
+        <p class="demo-total">Total demonstrativo: R$ 39,90</p>
+      </div>
+      <p class="demo-warning">Não há gateway de pagamento, cobrança ou pedido real. Não insira dados bancários ou de cartão.</p>
+      <button class="dialog-button" id="finish-demo" type="button">FINALIZAR SIMULAÇÃO (SEM PAGAMENTO)</button>
+    </section>
+
+    <section class="dialog-step" id="complete-step" hidden>
+      <p class="result-icon" aria-hidden="true">✨</p>
+      <p class="demo-label">Demonstração concluída</p>
+      <h2 class="result-title">Tudo certo!</h2>
+      <p class="result-copy">O fluxo foi simulado localmente. Nenhum dado foi salvo ou enviado e nenhuma cobrança foi feita.</p>
+      <button class="dialog-button" id="dialog-button" type="button">VOLTAR À ROLETA</button>
+    </section>
+  </dialog>
+
+  <script>
+    const prizes = [
+      { name: "Mini Panetone do Mickey 80g", lines: ["Mini Panetone", "do Mickey"], icon: "🍞", image: "./public/images/roleta-produtos/mini-panetone-mickey.png" },
+      { name: "Caixa de Bombons Dreams de Natal 200g", lines: ["Bombons Dreams", "de Natal"], icon: "🍫", image: "./public/images/roleta-produtos/caixa-bombons-dreams-natal.png" },
+      { name: "Caixa de Tabletes com Pelúcia Livro dos Monstros Harry", lines: ["Tabletes + Pelúcia", "Livro dos Monstros"], icon: "🧸", image: "./public/images/roleta-produtos/caixa-tabletes-pelucia-livro-monstros-harry-potter.png" },
+      { name: "Panetone Dreams Mil-Folhas 900g", lines: ["Panetone Dreams", "Mil-Folhas"], icon: "🎂", image: "./public/images/roleta-produtos/panetone-dreams-mil-folhas.png" },
+      { name: "Caixa de Bombons Ursinhos Carinhosos Ursinho Amigo", lines: ["Bombons Ursinhos", "Carinhosos"], icon: "🍬", image: "./public/images/roleta-produtos/caixa-bombons-ursinho-amigo.png" },
+      { name: "Copo Mickey Mouse com Bombons 135g", lines: ["Copo Mickey", "com Bombons"], icon: "🥤", image: "./public/images/roleta-produtos/copo-mickey-bombons.png" },
+      { name: "Globo de Natal com Trufas ao Leite 160g", lines: ["Globo de Natal", "com Trufas"], icon: "🔮", image: "./public/images/roleta-produtos/globo-natal-trufas-leite.png" },
+      { name: "Calendário do Advento Mickey e Minnie com Miniatura Surpresa 188g", lines: ["Calendário Advento", "Mickey e Minnie"], icon: "🎁", image: "./public/images/roleta-produtos/calendario-advento-mickey-minnie.png" },
+      { name: "VOCÊ NÃO GANHOU", lines: ["VOCÊ NÃO", "GANHOU"], noPrize: true }
+    ];
+
+    const svgNamespace = "http://www.w3.org/2000/svg";
+    const wheelRotor = document.getElementById("wheel-rotor");
+    const spinButton = document.getElementById("spin-button");
+    const status = document.getElementById("status");
+    const resultDialog = document.getElementById("result-dialog");
+    const resultCopy = document.getElementById("result-copy");
+    const resultIcon = document.getElementById("result-icon");
+    const dialogSteps = [...document.querySelectorAll(".dialog-step")];
+    let currentRotation = 0;
+    let lastWinningIndex = 0;
+    let spinTimer;
+
+    function createSvgElement(tag, attributes) {
+      const element = document.createElementNS(svgNamespace, tag);
+      for (const [name, value] of Object.entries(attributes)) {
+        element.setAttribute(name, value);
+      }
+      return element;
+    }
+
+    function pointOnWheel(angle, radius) {
+      const radians = angle * Math.PI / 180;
+      return {
+        x: 200 + Math.cos(radians) * radius,
+        y: 200 + Math.sin(radians) * radius
+      };
+    }
+
+    function drawWheel() {
+      const sliceAngle = 360 / prizes.length;
+
+      prizes.forEach((prize, index) => {
+        const startAngle = -90 + index * sliceAngle;
+        const endAngle = startAngle + sliceAngle;
+        const start = pointOnWheel(startAngle, 190);
+        const end = pointOnWheel(endAngle, 190);
+        const darkSlice = prize.noPrize || index % 2 === 0;
+        const slice = createSvgElement("g", {});
+        const path = createSvgElement("path", {
+          d: `M 200 200 L ${start.x} ${start.y} A 190 190 0 0 1 ${end.x} ${end.y} Z`,
+          fill: prize.noPrize ? "#8d2630" : darkSlice ? "#4a2815" : "#d9ae58",
+          stroke: "#f4d887",
+          "stroke-width": "2"
+        });
+        const middleAngle = startAngle + sliceAngle / 2;
+        const label = createSvgElement("g", {
+          transform: `translate(200 200) rotate(${middleAngle + 90}) translate(0 -132)`
+        });
+        const textAngle = (middleAngle + 90 + 360) % 360;
+        const labelText = createSvgElement("g", {
+          transform: textAngle > 90 && textAngle < 270 ? "rotate(180)" : ""
+        });
+        if (prize.image) {
+          const imageFrame = createSvgElement("rect", {
+            x: "-28",
+            y: "-31",
+            width: "56",
+            height: "57",
+            rx: "7",
+            fill: "#fff8e9",
+            stroke: "#d8b969",
+            "stroke-width": "1.2"
+          });
+          const image = createSvgElement("image", {
+            x: "-26",
+            y: "-29",
+            width: "52",
+            height: "53",
+            href: prize.image,
+            preserveAspectRatio: "xMidYMid meet"
+          });
+          labelText.append(imageFrame, image);
+        } else {
+          const noPrizeMark = createSvgElement("text", {
+            x: "0",
+            y: "5",
+            "text-anchor": "middle",
+            "font-size": "25",
+            "font-weight": "800",
+            fill: "#ffe7a1"
+          });
+          noPrizeMark.textContent = "×";
+          labelText.append(noPrizeMark);
+        }
+
+        prize.lines.forEach((line, lineIndex) => {
+          const text = createSvgElement("text", {
+            x: "0",
+            y: String((prize.noPrize ? 18 : 33) + lineIndex * 11),
+            "text-anchor": "middle",
+            "font-size": prize.noPrize ? "10" : "9.5",
+            "font-weight": "800",
+            fill: darkSlice ? "#ffe7a1" : "#3a210d"
+          });
+          text.textContent = line;
+          labelText.append(text);
+        });
+
+        label.append(labelText);
+        slice.append(path, label);
+        wheelRotor.append(slice);
+      });
+    }
+
+    function showPrize(index) {
+      const prize = prizes[index];
+      lastWinningIndex = index;
+      resultIcon.textContent = prize.icon;
+      resultCopy.textContent = `Nesta simulação, seu prêmio é: ${prize.name}.`;
+      status.textContent = `Prêmio demonstrativo: ${prize.name}.`;
+      showDialogStep("win-step");
+      resultDialog.showModal();
+    }
+
+    function showDialogStep(stepId) {
+      for (const step of dialogSteps) {
+        step.hidden = step.id !== stepId;
+      }
+    }
+
+    function spinWheel() {
+      if (spinButton.disabled) return;
+
+      spinButton.disabled = true;
+      status.textContent = "A roleta está girando...";
+
+      const winningPrizeIndexes = prizes
+        .map((prize, index) => prize.noPrize ? -1 : index)
+        .filter(index => index !== -1);
+      const winningIndex = winningPrizeIndexes[Math.floor(Math.random() * winningPrizeIndexes.length)];
+      const sliceAngle = 360 / prizes.length;
+      const middleAngle = -90 + (winningIndex + .5) * sliceAngle;
+      const targetAngle = (270 - middleAngle + 360) % 360;
+      const currentAngle = ((currentRotation % 360) + 360) % 360;
+      const extraTurns = 5 * 360;
+      const rotationToTarget = (targetAngle - currentAngle + 360) % 360;
+      currentRotation += extraTurns + rotationToTarget;
+      wheelRotor.style.transform = `rotate(${currentRotation}deg)`;
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      spinTimer = window.setTimeout(() => {
+        spinButton.disabled = false;
+        showPrize(winningIndex);
+      }, reducedMotion ? 20 : 5200);
+    }
+
+    function closeResult() {
+      if (resultDialog.open) resultDialog.close();
+      showDialogStep("win-step");
+      spinButton.focus();
+    }
+
+    drawWheel();
+    spinButton.addEventListener("click", spinWheel);
+    document.getElementById("dialog-close").addEventListener("click", closeResult);
+    document.getElementById("continue-demo").addEventListener("click", () => {
+      document.getElementById("checkout-prize").textContent = prizes[lastWinningIndex].name;
+      showDialogStep("details-step");
+    });
+    document.getElementById("demo-form").addEventListener("submit", event => {
+      event.preventDefault();
+      if (!event.currentTarget.reportValidity()) return;
+      showDialogStep("checkout-step");
+    });
+    document.getElementById("finish-demo").addEventListener("click", () => {
+      document.getElementById("demo-form").reset();
+      showDialogStep("complete-step");
+    });
+    document.getElementById("dialog-button").addEventListener("click", closeResult);
+    resultDialog.addEventListener("close", () => {
+      window.clearTimeout(spinTimer);
+      document.getElementById("demo-form").reset();
+      showDialogStep("win-step");
+      spinButton.focus();
+    });
+  </script>
+</body>
+</html>

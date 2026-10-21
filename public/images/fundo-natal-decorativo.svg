@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="640" viewBox="0 0 1600 640" fill="none">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1600" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b2819"/>
+      <stop offset=".48" stop-color="#123a25"/>
+      <stop offset="1" stop-color="#082216"/>
+    </linearGradient>
+    <radialGradient id="center-glow" cx="0" cy="0" r="1" gradientTransform="matrix(0 350 -730 0 800 290)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#245238" stop-opacity=".56"/>
+      <stop offset="1" stop-color="#0b2819" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffe8a0"/>
+      <stop offset=".5" stop-color="#d8ad58"/>
+      <stop offset="1" stop-color="#9d7134"/>
+    </linearGradient>
+    <linearGradient id="gift" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#23553a"/>
+      <stop offset="1" stop-color="#0b2919"/>
+    </linearGradient>
+    <radialGradient id="light">
+      <stop stop-color="#fff4c2"/>
+      <stop offset=".25" stop-color="#f3d47f" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#f3d47f" stop-opacity="0"/>
+    </radialGradient>
+    <g id="pine-sprig" stroke="#688254" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 0c56 27 116 64 178 126" stroke-width="3" opacity=".75"/>
+      <path d="M27 13 14-5m27 25L38-5m28 42L62 12m31 52-1-27m24 52 7-27m16 43 15-23m-129-83-20-5m41 28-23-1m40 21-22 4m42 19-20 9m39 14-16 13m35 6-13 17" stroke-width="5"/>
+      <path d="M27 13 14-5m27 25L38-5m28 42L62 12m31 52-1-27m24 52 7-27m16 43 15-23m-129-83-20-5m41 28-23-1m40 21-22 4m42 19-20 9m39 14-16 13m35 6-13 17" stroke="#a7b27a" stroke-width="1.2" opacity=".55"/>
+    </g>
+    <g id="gift-box">
+      <path d="M8 78h142v96H8z" fill="url(#gift)" stroke="url(#gold)" stroke-width="2"/>
+      <path d="M0 62h158v25H0z" fill="#1c4930" stroke="url(#gold)" stroke-width="2"/>
+      <path d="M67 62h24v112H67z" fill="url(#gold)"/>
+      <path d="M0 62h158v11H0z" fill="#e2bd6c" opacity=".42"/>
+      <path d="M79 61C39 54 38 24 57 22c13-1 21 16 22 39Zm0 0c40-7 41-37 22-39-13-1-21 16-22 39Z" fill="#245b3b" stroke="url(#gold)" stroke-width="2"/>
+      <path d="M79 60v13" stroke="#f0cf7a" stroke-width="5"/>
+    </g>
+    <g id="bauble">
+      <path d="M0 0v25" stroke="url(#gold)" stroke-width="2"/>
+      <path d="M-8 25h16v8H-8z" fill="url(#gold)"/>
+      <circle cy="53" r="22" fill="#8d2630" stroke="url(#gold)" stroke-width="2"/>
+      <path d="M-14 46c8-8 20-8 28 0M0 32v42" stroke="#e8ba67" stroke-width="1.3" opacity=".8"/>
+    </g>
+  </defs>
+
+  <path fill="url(#background)" d="M0 0h1600v640H0z"/>
+  <path fill="url(#center-glow)" d="M0 0h1600v640H0z"/>
+
+  <g fill="#f6d789" opacity=".62">
+    <circle cx="81" cy="210" r="2"/><circle cx="132" cy="265" r="1.5"/><circle cx="204" cy="176" r="2"/>
+    <circle cx="298" cy="230" r="1.5"/><circle cx="1518" cy="202" r="2"/><circle cx="1450" cy="275" r="1.5"/>
+    <circle cx="1387" cy="185" r="2"/><circle cx="1299" cy="238" r="1.5"/><circle cx="482" cy="112" r="1.5"/>
+    <circle cx="1112" cy="132" r="1.5"/><circle cx="370" cy="370" r="1.4"/><circle cx="1233" cy="386" r="1.5"/>
+  </g>
+  <g fill="url(#light)" opacity=".62">
+    <circle cx="90" cy="155" r="25"/><circle cx="210" cy="319" r="20"/><circle cx="327" cy="143" r="18"/>
+    <circle cx="1502" cy="144" r="23"/><circle cx="1381" cy="328" r="21"/><circle cx="1285" cy="159" r="18"/>
+    <circle cx="426" cy="253" r="14"/><circle cx="1175" cy="267" r="15"/>
+  </g>
+
+  <g opacity=".72">
+    <use href="#pine-sprig" transform="translate(-8 16) rotate(8 0 0) scale(1.7)"/>
+    <use href="#pine-sprig" transform="translate(1608 18) scale(-1.65 1.65)"/>
+    <use href="#pine-sprig" transform="translate(0 547) rotate(-24 0 0) scale(1.35)"/>
+    <use href="#pine-sprig" transform="translate(1600 553) scale(-1.4 1.4) rotate(-24)"/>
+  </g>
+
+  <g fill="url(#gold)" opacity=".72">
+    <path d="m96 346 5 13 13 5-13 5-5 13-5-13-13-5 13-5 5-13Z"/>
+    <path d="m1500 374 4 11 11 4-11 4-4 11-4-11-11-4 11-4 4-11Z"/>
+    <path d="m265 111 3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8Z"/>
+    <path d="m1340 112 3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8Z"/>
+  </g>
+
+  <use href="#bauble" transform="translate(146 0) scale(.8)"/>
+  <use href="#bauble" transform="translate(1452 0) scale(.92)"/>
+  <use href="#bauble" transform="translate(285 0) scale(.54)"/>
+  <use href="#bauble" transform="translate(1325 0) scale(.6)"/>
+
+  <g opacity=".94">
+    <use href="#gift-box" transform="translate(76 401) scale(1.08)"/>
+    <use href="#gift-box" transform="translate(223 470) scale(.74)"/>
+    <use href="#gift-box" transform="translate(1310 459) scale(.82)"/>
+    <use href="#gift-box" transform="translate(1433 386) scale(1.12)"/>
+  </g>
+
+  <path d="M34 609c220-72 381-66 529-22m1000 22c-220-72-381-66-529-22" stroke="#d9b969" stroke-opacity=".38" stroke-width="1.5"/>
+  <path d="M0 8h1600" stroke="#f0d18a" stroke-opacity=".22"/>
+</svg>
